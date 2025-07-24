@@ -61,22 +61,48 @@ export function getStageTitle(typeStage: string): string {
 }
 
 export function loadHtmlTemplate(typeStage: string): string {
-  // Utiliser le nouveau template exact du PDF
+  // Utiliser le nouveau template basé sur le modèle demandé par l'utilisateur
+  const newFormatTemplate = path.join(process.cwd(), 'src', 'templates', 'convention_new_format.html');
+  
+  console.log('Tentative de chargement du nouveau template:', newFormatTemplate);
+  console.log('Nouveau template existe:', fs.existsSync(newFormatTemplate));
+  
+  try {
+    if (fs.existsSync(newFormatTemplate)) {
+      const template = fs.readFileSync(newFormatTemplate, 'utf8');
+      console.log('Nouveau template chargé avec succès, taille:', template.length);
+      console.log('Template contient Article 1:', template.includes('Article 1'));
+      return template;
+    }
+  } catch (error) {
+    console.log('Erreur lors du chargement du nouveau template:', error);
+  }
+
+  // Fallback vers le template exact PDF si le nouveau n'existe pas
   const exactPdfTemplate = path.join(process.cwd(), 'src', 'templates', 'convention_exact_pdf.html');
+  
+  console.log('Fallback vers template exact:', exactPdfTemplate);
+  console.log('Template exact existe:', fs.existsSync(exactPdfTemplate));
   
   try {
     if (fs.existsSync(exactPdfTemplate)) {
-      return fs.readFileSync(exactPdfTemplate, 'utf8');
+      const template = fs.readFileSync(exactPdfTemplate, 'utf8');
+      console.log('Template exact chargé avec succès, taille:', template.length);
+      console.log('Template contient Article 1:', template.includes('Article 1'));
+      return template;
     }
   } catch (error) {
-    console.log('Template exact PDF non trouvé, utilisation du template spécifique');
+    console.log('Erreur lors du chargement du template exact:', error);
   }
 
+  console.log('Fallback vers template spécifique pour type:', typeStage);
   const templatePath = path.join(process.cwd(), 'src', 'templates', `convention_${typeStage}.html`);
   
   try {
     if (fs.existsSync(templatePath)) {
-      return fs.readFileSync(templatePath, 'utf8');
+      const template = fs.readFileSync(templatePath, 'utf8');
+      console.log('Template spécifique chargé:', templatePath);
+      return template;
     }
   } catch (error) {
     console.log(`Template spécifique non trouvé: ${templatePath}`);
@@ -87,13 +113,16 @@ export function loadHtmlTemplate(typeStage: string): string {
   
   try {
     if (fs.existsSync(defaultTemplate)) {
-      return fs.readFileSync(defaultTemplate, 'utf8');
+      const template = fs.readFileSync(defaultTemplate, 'utf8');
+      console.log('Template par défaut chargé:', defaultTemplate);
+      return template;
     }
   } catch (error) {
     console.log('Template par défaut non trouvé, utilisation du template intégré');
   }
 
   // Template intégré en cas d'absence de fichiers
+  console.log('Utilisation du template intégré par défaut');
   return getDefaultTemplate();
 }
 
@@ -332,20 +361,30 @@ export function getStageContent(typeStage: string): any {
 export function replaceTemplateVariables(template: string, data: ConventionData): string {
   const stageContent = getStageContent(data.typeStage);
   
+  // Format the date as expected in the exact template (DD/MM/YYYY format)
+  const dateGeneration = new Date().toLocaleDateString('fr-FR', {
+    day: '2-digit',
+    month: '2-digit', 
+    year: 'numeric'
+  });
+  
+  // Ensure telephone format matches the template expectation
+  const telephone = data.student.telephone || '+212(0) ......................';
+  
   return template
     .replace(/{{typeStageTitle}}/g, getStageTitle(data.typeStage))
     .replace(/{{typeStageDescription}}/g, getStageDescription(data.student.annee))
     .replace(/{{periodStage}}/g, getStagePeriod(data.student.annee))
-    .replace(/{{studentNom}}/g, data.student.nom)
-    .replace(/{{studentEmail}}/g, data.student.email)
-    .replace(/{{studentTelephone}}/g, data.student.telephone || '+212(0) .....................')
-    .replace(/{{studentFiliere}}/g, data.student.filiere)
+    .replace(/{{studentNom}}/g, data.student.nom || '')
+    .replace(/{{studentEmail}}/g, data.student.email || '')
+    .replace(/{{studentTelephone}}/g, telephone)
+    .replace(/{{studentFiliere}}/g, data.student.filiere || '')
     .replace(/{{studentAnnee}}/g, data.student.annee.toString())
-    .replace(/{{studentCodeApogee}}/g, data.student.codeApogee)
-    .replace(/{{studentCne}}/g, data.student.cne)
-    .replace(/{{studentCin}}/g, data.student.cin)
-    .replace(/{{studentDateNaissance}}/g, data.student.dateNaissance)
-    .replace(/{{dateGeneration}}/g, data.dateGeneration)
+    .replace(/{{studentCodeApogee}}/g, data.student.codeApogee || '')
+    .replace(/{{studentCne}}/g, data.student.cne || '')
+    .replace(/{{studentCin}}/g, data.student.cin || '')
+    .replace(/{{studentDateNaissance}}/g, data.student.dateNaissance || '')
+    .replace(/{{dateGeneration}}/g, dateGeneration)
     .replace(/{{stageObjectifs}}/g, stageContent.objectifs)
     .replace(/{{stageDuree}}/g, stageContent.duree)
     .replace(/{{stageEncadrement}}/g, stageContent.encadrement)
@@ -354,7 +393,11 @@ export function replaceTemplateVariables(template: string, data: ConventionData)
 
 export async function generateConventionHTML(student: Student): Promise<string> {
   const typeStage = getStageType(student.annee);
-  const dateGeneration = new Date().toLocaleDateString('fr-FR');
+  const dateGeneration = new Date().toLocaleDateString('fr-FR', {
+    day: '2-digit',
+    month: '2-digit', 
+    year: 'numeric'
+  });
   
   const conventionData: ConventionData = {
     student,
@@ -362,8 +405,12 @@ export async function generateConventionHTML(student: Student): Promise<string> 
     dateGeneration
   };
 
+  // Always try to use the exact PDF template first
   const htmlTemplate = loadHtmlTemplate(typeStage);
   const htmlContent = replaceTemplateVariables(htmlTemplate, conventionData);
+
+  console.log('Génération convention pour:', student.nom, '- Type:', typeStage);
+  console.log('Template utilisé contient:', htmlTemplate.includes('Article 1') ? 'Convention complète' : 'Template basique');
 
   return htmlContent;
 }
