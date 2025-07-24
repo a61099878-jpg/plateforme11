@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Convention de Stage en Entreprise</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.4;
+            margin: 0;
+            padding: 20px;
+            color: #000;
+            background: white;
+            font-size: 12px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+        
+        .logo-left {
+            width: 120px;
+            height: auto;
+        }
+        
+        .logo-right {
+            width: 120px;
+            height: auto;
+        }
+        
+        .header-center {
+            flex-grow: 1;
+            text-align: center;
+            margin: 0 20px;
+        }
+        
+        .ensam-info {
+            font-size: 10px;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+        
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 15px 0;
+        }
+        
+        .article {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        
+        .article-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+        
+        .article-content {
+            margin-left: 0;
+            line-height: 1.5;
+        }
+        
+        .partners-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 11px;
+        }
+        
+        .partners-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            vertical-align: top;
+        }
+        
+        .partners-table .header-cell {
+            font-weight: bold;
+            background-color: #f0f0f0;
+        }
+        
+        .signature-section {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            page-break-inside: avoid;
+        }
+        
+        .signature-box {
+            text-align: center;
+            width: 200px;
+            margin: 0 10px;
+        }
+        
+        .signature-space {
+            height: 60px;
+            margin: 15px 0;
+            border-bottom: 1px solid #000;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .evaluation-form {
+            margin-top: 30px;
+        }
+        
+        .eval-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 11px;
+        }
+        
+        .eval-table td, .eval-table th {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .eval-table th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        .footer-info {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            text-align: center;
+            font-size: 10px;
+            border-top: 1px solid #000;
+            padding-top: 10px;
+        }
+        
+        .page-number {
+            position: fixed;
+            bottom: 10px;
+            right: 30px;
+            font-size: 10px;
+        }
+        
+        @media print {
+            body { 
+                margin: 0; 
+                padding: 15px;
+                -webkit-print-color-adjust: exact;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+        
+        .seal-area {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .seal-image {
+            width: 80px;
+            height: auto;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1 -->
+    <div class="header">
+        <img src="um5.png" alt="UM5 Logo" class="logo-left">
+        <div class="header-center">
+            <div class="ensam-info">
+                ENSAM-Rabat, B.P. : 6207 Av. Armée Royale, Madinat Al Irfane Rabat – Maroc<br>
+                Tél. : (212) (0) 537 56 40 62 Fax : (212) (0) 37 56 40 76
+            </div>
+            <div class="title">Convention de Stage<br>en Entreprise</div>
+        </div>
+        <img src="ensamrabat.png" alt="ENSAM Rabat Logo" class="logo-right">
+    </div>
+
+    <div class="article">
+        <div class="article-title">Article 1</div>
+        <div class="article-content">
+            La présente convention règle les rapports entre les trois partenaires : l'entreprise, l'ENSAM de Rabat et 
+            l'étudiant pour un {{typeStageDescription}} qui fait partie des modules du cycle d'Ingénieur ayant lieu {{periodStage}}.
+        </div>
+    </div>
+
+    <div class="article">
+        <div class="article-title">Article 2</div>
+        <div class="article-content">
+            Les partenaires sont identifiés comme suit :
+        </div>
+        
+        <table class="partners-table">
+            <tr>
+                <td class="header-cell"><strong>Entreprise :</strong></td>
+                <td class="header-cell"><strong>Étudiant :</strong></td>
+                <td class="header-cell"><strong>Établissement de formation :</strong></td>
+            </tr>
+            <tr>
+                <td>&nbsp;<br>&nbsp;<br>&nbsp;</td>
+                <td>Mr/Mlle {{studentNom}}</td>
+                <td>ENSAM DE RABAT<br>Av des FAR BP 6207 Rabat<br>Instituts</td>
+            </tr>
+            <tr>
+                <td><strong>Tél/fax</strong><br>&nbsp;</td>
+                <td><strong>N° de téléphone</strong><br>{{studentTelephone}}</td>
+                <td><strong>Tél/fax</strong><br>0537 564062 / 0537 564076</td>
+            </tr>
+            <tr>
+                <td><strong>Représentée par :</strong> nom / fonction<br>&nbsp;</td>
+                <td><strong>Spécialité de la formation</strong><br>{{studentFiliere}}</td>
+                <td><strong>Représenté par :</strong> nom / fonction<br>&nbsp;</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="article">
+        <div class="article-title">Article 3</div>
+        <div class="article-content">
+            Ce stage a pour objet essentiel de permettre à l'étudiant de mobiliser les connaissances acquises en 
+            formation, en les exploitant dans un contexte professionnel réel. Les contenus des activités demandées à 
+            l'étudiant font l'objet d'une concertation des partenaires et sont formalisés dans l'annexe pédagogique 
+            jointe à la présente convention.
+        </div>
+    </div>
+
+    <div class="article">
+        <div class="article-title">Article 4</div>
+        <div class="article-content">
+            Le stagiaire, pendant toute la durée de son séjour en entreprise, demeure un étudiant. A ce titre, il est 
+            assuré par son établissement de formation. En cas d'accident de l'étudiant stagiaire pendant son travail ou 
+            au cours de ses trajets, le chef d'entreprise s'engage à signaler les faits le plus rapidement possible à 
+            l'établissement et à faire parvenir les déclarations nécessaires.
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+    
+    <!-- Page 2 -->
+    <div class="footer-info">
+        ENSAM-Rabat, B.P. : 6207 Av. Armée Royale, Madinat Al Irfane Rabat – Maroc<br>
+        Tél. : (212) (0) 537 56 40 62  Fax : (212) (0) 37 56 40 76
+    </div>
+    <div class="page-number">2/2</div>
+
+    <div class="article">
+        <div class="article-title">Article 5</div>
+        <div class="article-content">
+            Durant le stage, l'étudiant s'engage à respecter le règlement de l'entreprise notamment en ce qui 
+            concerne les horaires, les règles d'hygiène et de sécurité et la confidentialité des informations. La sortie 
+            d'informations à l'extérieur de l'entreprise est soumise à une autorisation préalable de la part de cette 
+            dernière. Cependant, l'entreprise veillera à laisser à l'étudiant les supports minimaux pouvant permettre 
+            une évaluation pertinente par le jury national d'examen lors de sa soutenance du rapport de stage.
+        </div>
+    </div>
+
+    <div class="article">
+        <div class="article-title">Article 6</div>
+        <div class="article-content">
+            En cas de manquement à la discipline, le responsable de l'entreprise se réserve le droit de mettre fin au 
+            stage de l'étudiant fautif, après en avoir prévenu le représentant de l'établissement de formation et lui avoir 
+            notifié la sanction par écrit.
+        </div>
+    </div>
+
+    <div class="article">
+        <div class="article-title">Article 7</div>
+        <div class="article-content">
+            Durant le stage, les frais d'hébergement, de restauration et de transport éventuels sont à la charge de 
+            l'étudiant. Néanmoins, l'offre volontaire de l'entreprise pour prendre en charge ces frais demeure possible.
+        </div>
+    </div>
+
+    <div class="article">
+        <div class="article-title">Article 8</div>
+        <div class="article-content">
+            Au cours du stage, l'étudiant ne pourra prétendre à aucune rémunération. Néanmoins, une gratification, à 
+            l'appréciation de l'entreprise, peut lui être accordée.
+        </div>
+    </div>
+
+    <div class="article">
+        <div class="article-title">Article 9</div>
+        <div class="article-content">
+            L'entreprise désignera un collaborateur chargé d'assurer l'encadrement de l'étudiant.
+        </div>
+    </div>
+
+    <div class="article">
+        <div class="article-title">Article 10</div>
+        <div class="article-content">
+            L'étudiant est tenu de fournir à l'entreprise une copie de son rapport de stage dans les 15 jours suivant la 
+            fin de celui-ci. En retour un certificat de stage lui sera remis par l'entreprise.
+        </div>
+    </div>
+
+    <div class="article">
+        <div class="article-title">Article 11</div>
+        <div class="article-content">
+            Le cas échéant, les frais de formation afférents aux stages seront à la charge de l'entreprise.
+        </div>
+    </div>
+
+    <div class="article">
+        <div class="article-title">Article 12</div>
+        <div class="article-content">
+            Toute prolongation éventuelle de stage fera l'objet d'une annexe à la présente convention.
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 30px 0; font-weight: bold;">
+        Fait à Rabat le {{dateGeneration}}
+    </div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <div><strong>Le représentant de<br>l'entreprise :</strong></div>
+            <div class="signature-space"></div>
+        </div>
+        <div class="signature-box">
+            <div><strong>L'étudiant stagiaire :</strong></div>
+            <div class="signature-space"></div>
+        </div>
+        <div class="signature-box">
+            <div><strong>Le représentant de<br>l'établissement de formation :</strong></div>
+            <div class="signature-space"></div>
+            <div class="seal-area">
+                <img src="image.png" alt="Cachet ENSAM" class="seal-image">
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+    
+    <!-- Page 3 - Fiche d'évaluation -->
+    <div class="header">
+        <img src="um5.png" alt="UM5 Logo" class="logo-left">
+        <div class="header-center">
+            <div class="ensam-info">
+                ENSAM-Rabat, B.P. : 6207 Av. Armée Royale, Madinat Al Irfane Rabat – Maroc<br>
+                Tél. : (212) (0) 537 56 40 62 Fax : (212) (0) 37 56 40 76
+            </div>
+        </div>
+        <img src="ensamrabat.png" alt="ENSAM Rabat Logo" class="logo-right">
+    </div>
+
+    <div class="evaluation-form">
+        <h3><u>Fiche d'évaluation de stage – Ingénieur :</u> ............................................................</h3>
+        
+        <table class="eval-table" style="margin-top: 30px;">
+            <tr>
+                <td><strong>Nom de la société et ville</strong></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><strong>Nom du tuteur</strong></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><strong>Fonction / Service</strong></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><strong>Nom du stagiaire</strong></td>
+                <td>{{studentNom}}</td>
+            </tr>
+            <tr>
+                <td><strong>Spécialité</strong></td>
+                <td>{{studentFiliere}}</td>
+            </tr>
+            <tr>
+                <td><strong>Période du stage</strong></td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+
+        <h4>Critères d'évaluation</h4>
+        <table class="eval-table">
+            <tr>
+                <th>Critères d'évaluation</th>
+                <th>Faible</th>
+                <th>Moyen</th>
+                <th>Bien</th>
+                <th>Très bien</th>
+            </tr>
+            <tr>
+                <td>Ponctualité - assiduité</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Intégration aux équipes</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Esprit d'initiative et engagement</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Compétences techniques</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td>Communication</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+
+        <div style="margin-top: 30px;">
+            <strong>Observations :</strong>
+            <div style="border-bottom: 1px solid #000; margin: 10px 0; height: 20px;"></div>
+            <div style="border-bottom: 1px solid #000; margin: 10px 0; height: 20px;"></div>
+            <div style="border-bottom: 1px solid #000; margin: 10px 0; height: 20px;"></div>
+            <div style="border-bottom: 1px solid #000; margin: 10px 0; height: 20px;"></div>
+        </div>
+
+        <div style="margin-top: 40px; display: flex; justify-content: space-between;">
+            <div>
+                <strong>Fait à</strong> ____________________________________ <strong>le</strong> ______________________________
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <strong>Visa du responsable du stage</strong>
+            <div style="height: 80px; border: 1px solid #000; margin: 20px auto; width: 200px;"></div>
+        </div>
+
+        <div style="margin-top: 30px; font-size: 10px; text-align: center;">
+            Le présent document sera renvoyé directement à l'école, par courrier ou par fax, au : Service chargé du 
+            partenariat Ecole/Entreprise : Fax 0537564076
+        </div>
+    </div>
+
+    <div class="footer-info">
+        ENSAM-Rabat, B.P. : 6207 Av. Armée Royale, Madinat Al Irfane Rabat – Maroc<br>
+        Tél. : (212) (0) 537 56 40 62  Fax : (212) (0) 37 56 40 76
+    </div>
+    <div class="page-number">3/2</div>
+</body>
+</html>
